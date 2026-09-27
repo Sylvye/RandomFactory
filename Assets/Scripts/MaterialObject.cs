@@ -1,10 +1,14 @@
-using System;
 using UnityEngine;
 
 public class MaterialObject : MonoBehaviour, IDraggable
 {
-    public string name;
+    public string displayName;
     private Rigidbody2D _rb;
+    [SerializeField] private float springStiffness = 60f;
+    [SerializeField] private float springDamping = 12f;
+    private Vector2 _target;
+    private float _strength;
+    private bool _dragging;
     
     // Start is called before the first frame update
     public void Start()
@@ -12,29 +16,29 @@ public class MaterialObject : MonoBehaviour, IDraggable
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
-        
+        if (!_dragging) return;
+
+        // Strength is a force limit. Mass affects acceleration through the Rigidbody2D.
+        var force = (_target - _rb.position) * springStiffness - _rb.linearVelocity * springDamping;
+        _rb.AddForce(Vector2.ClampMagnitude(force, _strength));
     }
 
     public void OnDrag(Vector2 position, float strength)
     {
-        var difference = position - _rb.position;
-        if (difference.magnitude > 1)
-        {
-            difference.Normalize();
-        }
-        _rb.AddForce(difference * strength / _rb.mass);
+        _target = position;
+        _strength = Mathf.Max(0f, strength);
     }
 
     public void OnStartDrag()
     {
-        
+        _dragging = true;
+        _target = _rb.position;
     }
 
     public void OnStopDrag()
     {
-        
+        _dragging = false;
     }
 }
