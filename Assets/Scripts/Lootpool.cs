@@ -74,8 +74,11 @@ public class Lootpool<T>
     {
         var index = ChooseIndex();
         var item = _items[index];
+        var weight = _weights[index];
         _items.RemoveAt(index);
         _weights.RemoveAt(index);
+        _length--;
+        _totalWeight -= weight;
         return item;
     }
 

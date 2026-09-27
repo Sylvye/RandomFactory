@@ -36,7 +36,8 @@ public class PlayerAbilityManager : MonoBehaviour
                 var angle = transform.eulerAngles.z;
 
                 Collider2D[] hits = Physics2D.OverlapBoxAll(center, reachHitbox, angle);
-                Physics2DQueryVisualizer.DrawBox(center, reachHitbox, angle, Color.green);
+                if (DebugManager.Debug)
+                    Physics2DQueryVisualizer.DrawBox(center, reachHitbox, angle, Color.green);
 
                 IDraggable draggable = null;
                 var closestDistance = float.PositiveInfinity;
@@ -68,6 +69,12 @@ public class PlayerAbilityManager : MonoBehaviour
                 _draggedObject = null;
                 _dragging = false;
             }
+        }
+        
+        var dState = KeyboardInputManager.Main.GetKeyState("d");
+        if (dState.IsKeyDown())
+        {
+            DebugManager.Debug = !DebugManager.Debug;
         }
     }
 }

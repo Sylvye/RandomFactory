@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class MaterialSpawner : MonoBehaviour
 {
-    [SerializeField] private Lootpool<MaterialObjectBlueprint> blueprintLootpool;
+    [SerializeField] private MaterialObjectLootpool blueprintLootpool;
     [SerializeField] private float spawnDelay;
     [SerializeField] private float spawnRadius;
     [SerializeField] private float maxNearby;
     private float _lastSpawn;
-    private Rigidbody2D _rb;
-    private Collider2D _col;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,8 +20,9 @@ public class MaterialSpawner : MonoBehaviour
     {
         if (Time.time >= _lastSpawn + spawnDelay)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(_rb.position, spawnRadius);
-            Physics2DQueryVisualizer.DrawCircle(_rb.position, spawnRadius, Color.cyan);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, spawnRadius);
+            if (DebugManager.Debug)
+                Physics2DQueryVisualizer.DrawCircle(transform.position, spawnRadius, Color.cyan);
             List<MaterialObject> matObjs = new();
 
             foreach (Collider2D hit in hits)
@@ -39,14 +38,18 @@ public class MaterialSpawner : MonoBehaviour
             {
                 Spawn();
             }
+            _lastSpawn = Time.time;
         }
     }
 
     private void Spawn()
     {
-        float angle = Random.value * 360;
+        if (blueprintLootpool is null || !blueprintLootpool.TrySelect(out MaterialObjectBlueprint blueprint) || blueprint.prefab is null)
+            return;
+
+        float angle = Random.value * 360f;
         float distance = Random.value * spawnRadius;
-        Vector3 spawnPos = transform.position + (Vector3)AngleHelper.DegreesToVector(angle);
-        GameObject spawned = Instantiate(blueprintLootpool.Select().prefab, spawnPos, Quaternion.identity);
+        Vector3 spawnPos = transform.position + (Vector3)AngleHelper.DegreesToVector(angle) * distance;
+        Instantiate(blueprint.prefab, spawnPos, Quaternion.identity);
     }
 }
