@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,11 +13,15 @@ public class PointerInputManager : MonoBehaviour
 
     private Vector2 _lastWorldPos;
     private Vector2 _delta;
-    
-    // Start is called before the first frame update
-    public void Start()
+
+    void Awake()
     {
         Main = this;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         _mainCamera = Camera.main;
         _mouse = Mouse.current;
         _isDragging = false;
@@ -24,7 +29,7 @@ public class PointerInputManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Update()
+    void Update()
     {
         _lastWorldPos = _mouseWorldPos;
         _mouseWorldPos = _mainCamera.ScreenToWorldPoint(_mouse.position.ReadValue());

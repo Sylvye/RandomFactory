@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631fc3d686e742a8ba61d1cc91fc0d31, type: 3}
   m_Name: MaterialObjectLootpool
   m_EditorClassIdentifier: Assembly-CSharp::MaterialObjectLootpool
-  entries: []
+  entries:
+  - blueprint: {fileID: 11400000, guid: db91b4aa28e4cc44598522d887b23cc4, type: 2}
+    weight: 1

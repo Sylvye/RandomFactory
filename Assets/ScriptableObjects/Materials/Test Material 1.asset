@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ea16f72bd494b49a32960f8c3f6833, type: 3}
   m_Name: Test Material 1
   m_EditorClassIdentifier: Assembly-CSharp::MaterialObjectBlueprint
-  icon: {fileID: 0}
-  prefab: {fileID: 0}
+  icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  prefab: {fileID: 2821087587428040637, guid: 0dc750286ca11584ba4b65d91d32faa5, type: 3}
   specs:
-    strength: 0
-    hardness: 0
-    elasticity: 0
-    ductility: 0
-    thermalConductivity: 0
-    electricConductivity: 0
-    density: 0
-    meltingPoint: 0
-    reactivity: 0
-    radioactivity: 0
+    strength: 1
+    hardness: 1
+    elasticity: 1
+    ductility: 1
+    thermalConductivity: 1
+    electricConductivity: 1
+    density: 1
+    meltingPoint: 1
+    reactivity: 1
+    radioactivity: 1

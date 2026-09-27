@@ -10,11 +10,16 @@ public class KeyboardInputManager : MonoBehaviour
     public static KeyboardInputManager Main;
     private List<string> _pressedKeys;
     private Keyboard _keyboard;
-    
+
+
+    private void Awake()
+    {
+        Main = this;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Main = this;
         _pressedKeys = new List<string>();
         _keyboard = Keyboard.current;
     }
