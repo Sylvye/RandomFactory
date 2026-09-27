@@ -13,8 +13,6 @@ public class PlayerAbilityManager : MonoBehaviour
     private IDraggable _draggedObject;
     private KeyboardInputManager _kim;
     private PlayerController _pc;
-    private Rigidbody2D _rb;
-    private Collider2D _col;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,22 +21,30 @@ public class PlayerAbilityManager : MonoBehaviour
         _draggedObject = null;
         _kim = KeyboardInputManager.Main;
         _pc = PlayerController.Main;
-        _rb = _pc.GetRB();
-        _col = _pc.GetCol();
     }
 
     // Update is called once per frame
     void Update()
     {
-        var spaceState = _kim.GetKeyState("space");
-        ExecuteDrag(spaceState);
-        
         var eState = _kim.GetKeyState("e");
         ExecuteInteract(eState);
         
         var dState = _kim.GetKeyState("d");
         if (dState.IsKeyDown()) DebugManager.Debug = !DebugManager.Debug;
+    }
 
+    private void FixedUpdate()
+    {
+        var spaceState = _kim.GetKeyState("space");
+        ExecuteDrag(spaceState);
+    }
+
+    public void ApplyForceToDragged(Vector2 force)
+    {
+        if (_dragging)
+        {
+            _draggedObject.GetPhysics().ApplyForce(force);
+        }
     }
 
     private void ExecuteDrag(KeyState state)
@@ -50,10 +56,10 @@ public class PlayerAbilityManager : MonoBehaviour
                 var difference = PointerInputManager.Main.GetMouseWorldPos() - (Vector2)transform.position;
                 if (difference.magnitude > reach)
                 {
-                    difference = difference.normalized;
+                    difference = difference.normalized * reach;
                 }
-                var center = (Vector2)transform.position + difference * reach;
-                _draggedObject.OnDrag(center, strength * _rb.mass);
+                var center = (Vector2)transform.position + difference;
+                _draggedObject.OnDrag(center, strength * _pc.GetMass());
             }
             else
             {
@@ -63,10 +69,11 @@ public class PlayerAbilityManager : MonoBehaviour
                 var closestDistance = float.PositiveInfinity;
                 foreach (var hit in hits)
                 {
-                    if (hit.attachedRigidbody == _rb || hit.transform.IsChildOf(transform)) continue;
+                    if (hit.attachedRigidbody == _pc.GetRB() || hit.transform.IsChildOf(transform)) continue;
                     var candidate = hit.GetComponentInParent<IDraggable>();
                     if (candidate is null) continue;
-                    var distance = (_rb.position - hit.ClosestPoint(_rb.position)).sqrMagnitude;
+                    var pos = _pc.GetPos();
+                    var distance = (pos - hit.ClosestPoint(pos)).sqrMagnitude;
                     if (distance >= closestDistance) continue;
                     closestDistance = distance;
                     draggable = candidate;
@@ -75,7 +82,7 @@ public class PlayerAbilityManager : MonoBehaviour
                 if (draggable is not null)
                 {
                     draggable.OnStartDrag();
-                    draggable.OnDrag(transform.position + transform.up * (reach * 1.2f), strength * _rb.mass);
+                    draggable.OnDrag(transform.position + transform.up * (reach * 1.2f), strength * _pc.GetMass());
                     _draggedObject = draggable;
                     _dragging = true;
                 }
@@ -102,10 +109,11 @@ public class PlayerAbilityManager : MonoBehaviour
             var closestDistance = float.PositiveInfinity;
             foreach (var hit in hits)
             {
-                if (hit.attachedRigidbody == _rb || hit.transform.IsChildOf(transform)) continue;
+                if (hit.attachedRigidbody == _pc.GetRB() || hit.transform.IsChildOf(transform)) continue;
                 var candidate = hit.GetComponentInParent<IInteractable>();
                 if (candidate == null) continue;
-                var distance = (_rb.position - hit.ClosestPoint(_rb.position)).sqrMagnitude;
+                var pos = _pc.GetPos();
+                var distance = (pos - hit.ClosestPoint(pos)).sqrMagnitude;
                 if (distance >= closestDistance) continue;
                 closestDistance = distance;
                 interactable = candidate;

@@ -7,14 +7,12 @@ public class PlayerMovementManager : MonoBehaviour
     // [SerializeField] private float turnSpeed;
     [SerializeField] private float sprintMult;
     private PlayerController _pc;
-    private Rigidbody2D _rb;
-    private Collider2D _col;
+    private PlayerAbilityManager _pam;
     
     public void Start()
     {
         _pc = PlayerController.Main;
-        _rb = _pc.GetRB();
-        _col = _pc.GetCol();
+        _pam = _pc.GetPAM();
     }
 
     public void FixedUpdate()
@@ -22,12 +20,11 @@ public class PlayerMovementManager : MonoBehaviour
         var movementInput = KeyboardInputManager.Main.GetMovementVector();
         var shiftHeld = KeyboardInputManager.Main.GetKeyState("leftShift");
         var sprinting = shiftHeld is KeyState.Pressed or KeyState.Held;
-        var force = movementInput;
         // movement
         // Turn(force.x * turnSpeed);
         // Accelerate(force.y * speed);
-        
-        _rb.AddForce(speed * (sprinting ? sprintMult : 1) * force.normalized);
+        var force = speed * (sprinting ? sprintMult : 1) * movementInput.normalized;
+        _pc.ApplyForce(force);
     }
 
     // public void Accelerate(float value)

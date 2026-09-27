@@ -1,31 +1,23 @@
 using System.Drawing;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : PhysicsObject
 {
     public static PlayerController Main;
     private PlayerAbilityManager _pam;
     private PlayerMovementManager _pmm;
-    private Rigidbody2D _rb;
-    private Collider2D _col;
 
-    void Awake()
+    private void Awake()
     {
         Main = this;
         _pam = GetComponent<PlayerAbilityManager>();
         _pmm = GetComponent<PlayerMovementManager>();
-        _rb = GetComponent<Rigidbody2D>();
-        _col = GetComponent<Collider2D>();
     }
-
-    public Rigidbody2D GetRB()
+    
+    public override void ApplyForce(Vector2 force)
     {
-        return _rb;
-    }
-
-    public Collider2D GetCol()
-    {
-        return _col;
+        base.ApplyForce(force);
+        _pam.ApplyForceToDragged(force);
     }
 
     public PlayerAbilityManager GetPAM()

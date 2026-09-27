@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// grid-locked stations placed/crafted/found by the player
 public class WorkStation : MonoBehaviour, IInteractable
 {
     [SerializeField] private float interactionRadius;
