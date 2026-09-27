@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ea16f72bd494b49a32960f8c3f6833, type: 3}
+  m_Name: Test Material 1
+  m_EditorClassIdentifier: Assembly-CSharp::MaterialObjectBlueprint
+  icon: {fileID: 0}
+  prefab: {fileID: 0}
+  specs:
+    strength: 0
+    hardness: 0
+    elasticity: 0
+    ductility: 0
+    thermalConductivity: 0
+    electricConductivity: 0
+    density: 0
+    meltingPoint: 0
+    reactivity: 0
+    radioactivity: 0

@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -256,6 +257,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f22e3191bbcf647a49d2b22b7f1fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  speed: 0.05
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,9 +367,10 @@ GameObject:
   - component: {fileID: 944578617}
   - component: {fileID: 944578616}
   - component: {fileID: 944578615}
+  - component: {fileID: 944578620}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -372,6 +387,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c6fafbb72ce2c4e9356e99535e6fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  speed: 20
+  turnSpeed: 1
+  sprintMult: 2
 --- !u!50 &944578616
 Rigidbody2D:
   serializedVersion: 5
@@ -385,8 +403,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 16
-  m_AngularDamping: 8
+  m_LinearDamping: 8
+  m_AngularDamping: 4
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -523,6 +541,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &944578620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944578614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df14f098c742f5e42899d191967f01d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilityManager
+  reach: 1
+  reachHitbox: {x: 1, y: 1}
+  strength: 1000
 --- !u!1 &1129175598
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +682,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 2
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -749,7 +782,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1b6ab3a8ba73145976c9f9f4886e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaterialObject
-  name: 
+  displayName: 
+  springStiffness: 60
+  springDamping: 12
 --- !u!1 &2134762044
 GameObject:
   m_ObjectHideFlags: 0

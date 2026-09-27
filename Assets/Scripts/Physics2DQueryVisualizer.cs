@@ -5,6 +5,20 @@ using UnityEngine;
 /// </summary>
 public static class Physics2DQueryVisualizer
 {
+    public static void DrawCircle(Vector2 center, float radius, Color color, float duration = 0f)
+    {
+        const int segments = 32;
+        var previousPoint = GetCirclePoint(center, radius, 0f);
+
+        for (var i = 1; i <= segments; i++)
+        {
+            var angle = i * Mathf.PI * 2f / segments;
+            var nextPoint = GetCirclePoint(center, radius, angle);
+            Debug.DrawLine(previousPoint, nextPoint, color, duration);
+            previousPoint = nextPoint;
+        }
+    }
+
     public static void DrawBox(Vector3 center, Vector2 size, float angle, Color color, float duration = 0f)
     {
         var corners = GetBoxCorners(center, size, angle);
@@ -51,6 +65,14 @@ public static class Physics2DQueryVisualizer
             center - (Vector3)right - (Vector3)up,
             center + (Vector3)right - (Vector3)up
         };
+    }
+
+    private static Vector3 GetCirclePoint(Vector2 center, float radius, float angle)
+    {
+        return new Vector3(
+            center.x + Mathf.Cos(angle) * radius,
+            center.y + Mathf.Sin(angle) * radius,
+            0f);
     }
 
     private static void DrawOutline(Vector3[] corners, Color color, float duration)

@@ -29,7 +29,6 @@ public class PlayerAbilityManager : MonoBehaviour
             if (_dragging)
             {
                 _draggedObject.OnDrag(transform.position + transform.up * (reach * 1.2f), strength * _rb.mass);
-                print("Dragging");
             }
             else
             {
@@ -58,7 +57,6 @@ public class PlayerAbilityManager : MonoBehaviour
                     draggable.OnDrag(transform.position + transform.up * (reach * 1.2f), strength * _rb.mass);
                     _draggedObject = draggable;
                     _dragging = true;
-                    print("Started Dragging");
                 }
             }
         }
@@ -69,7 +67,6 @@ public class PlayerAbilityManager : MonoBehaviour
                 _draggedObject.OnStopDrag();
                 _draggedObject = null;
                 _dragging = false;
-                print("Stopped Dragging");
             }
         }
     }
