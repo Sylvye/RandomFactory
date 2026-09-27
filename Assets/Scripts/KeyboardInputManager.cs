@@ -25,7 +25,7 @@ public class KeyboardInputManager : MonoBehaviour
 
         if (key is null)
         {
-            Debug.Log("Invalid key: " + keyName);
+            // Debug.Log("Invalid key: " + keyName);
             return KeyState.Up;
         }
         
@@ -35,7 +35,7 @@ public class KeyboardInputManager : MonoBehaviour
         if (key.wasReleasedThisFrame)
             return KeyState.Released;
 
-        return key.isPressed ? KeyState.Down : KeyState.Up;
+        return key.isPressed ? KeyState.Held : KeyState.Up;
     }
 
     public Vector2 GetMovementVector()

@@ -1,43 +1,39 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class MaterialObject : MonoBehaviour, IDraggable
 {
     public string name;
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
     
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
 
-    public void OnDrag(PointerInputManager pointer)
+    public void OnDrag(Vector2 position, float strength)
     {
-        Vector2 difference = pointer.GetMouseWorldPos() - rb.position;
-        Vector2 posDif = new Vector2(Math.Abs(difference.x), Math.Abs(difference.y));
-        rb.AddForce(difference*posDif);
+        var difference = position - _rb.position;
+        if (difference.magnitude > 1)
+        {
+            difference.Normalize();
+        }
+        _rb.AddForce(difference * strength / _rb.mass);
     }
 
-    public void OnStartDrag(PointerInputManager pointer)
+    public void OnStartDrag()
     {
         
     }
 
-    public void OnStopDrag(PointerInputManager pointer)
+    public void OnStopDrag()
     {
         
     }

@@ -1,25 +1,25 @@
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.iOS;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed;
-    public float turnSpeed;
-    public float sprintMult;
+    [SerializeField] private float speed;
+    [SerializeField] private float turnSpeed;
+    [SerializeField] private float sprintMult;
     private Rigidbody2D _rb;
+    private Collider2D _col;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _col = GetComponent<Collider2D>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public void FixedUpdate()
     {
         var movementInput = KeyboardInputManager.Main.GetMovementVector();
         var shiftHeld = KeyboardInputManager.Main.GetKeyState("leftShift");
-        var sprinting = shiftHeld is KeyState.Pressed or KeyState.Down;
+        var sprinting = shiftHeld is KeyState.Pressed or KeyState.Held;
         var force = movementInput;
         if (sprinting)
         {
@@ -30,12 +30,12 @@ public class PlayerMovement : MonoBehaviour
         Accelerate(force.y * speed);
     }
 
-    void Accelerate(float value)
+    public void Accelerate(float value)
     {
         _rb.AddRelativeForce(Vector2.up * value);
     }
 
-    void Turn(float torque)
+    private void Turn(float torque)
     {
         _rb.AddTorque(-torque);
     }

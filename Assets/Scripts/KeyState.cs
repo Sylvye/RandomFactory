@@ -1,9 +1,13 @@
-using UnityEngine;
-
 public enum KeyState
 {
     Pressed,
-    Down,
+    Held,
     Released,
     Up
+}
+
+public static class KeyStateHelpers
+{
+    public static bool IsKeyDown(this KeyState keyState) =>
+        keyState is KeyState.Held or KeyState.Pressed;
 }
