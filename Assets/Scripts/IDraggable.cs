@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IDraggable
 {
-    void OnDrag(PointerInteractor pointer);
-    void OnStartDrag(PointerInteractor pointer);
-    void OnStopDrag(PointerInteractor pointer);
+    void OnDrag(PointerInputManager pointer);
+    void OnStartDrag(PointerInputManager pointer);
+    void OnStopDrag(PointerInputManager pointer);
 }

@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class MaterialObject : MonoBehaviour, IDraggable
 {
+    public string name;
     private Rigidbody2D rb;
     
     // Start is called before the first frame update
@@ -22,18 +25,19 @@ public class MaterialObject : MonoBehaviour, IDraggable
         
     }
 
-    public void OnDrag(PointerInteractor pointer)
+    public void OnDrag(PointerInputManager pointer)
     {
         Vector2 difference = pointer.GetMouseWorldPos() - rb.position;
-        rb.AddForce(difference);
+        Vector2 posDif = new Vector2(Math.Abs(difference.x), Math.Abs(difference.y));
+        rb.AddForce(difference*posDif);
     }
 
-    public void OnStartDrag(PointerInteractor pointer)
+    public void OnStartDrag(PointerInputManager pointer)
     {
         
     }
 
-    public void OnStopDrag(PointerInteractor pointer)
+    public void OnStopDrag(PointerInputManager pointer)
     {
         
     }
