@@ -18,6 +18,11 @@ public class PhysicsObject : MonoBehaviour
     {
         Rb.AddForce(force);
     }
+
+    public Vector2 GetVelocity()
+    {
+        return Rb.linearVelocity;
+    }
     
     public Rigidbody2D GetRB()
     {
