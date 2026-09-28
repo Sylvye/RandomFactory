@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MaterialSpawner : MonoBehaviour
+public class ResourceSpawner : MonoBehaviour
 {
     [SerializeField] private MaterialObjectLootpool blueprintLootpool;
     [SerializeField] private float spawnDelay;
@@ -23,11 +23,11 @@ public class MaterialSpawner : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, spawnRadius);
             if (DebugManager.Debug)
                 Physics2DQueryVisualizer.DrawCircle(transform.position, spawnRadius, Color.cyan);
-            List<MaterialObject> matObjs = new();
+            List<ResourceObject> matObjs = new();
 
             foreach (Collider2D hit in hits)
             {
-                MaterialObject matObj = hit.gameObject.GetComponentInParent<MaterialObject>();
+                ResourceObject matObj = hit.gameObject.GetComponentInParent<ResourceObject>();
                 if (matObj is not null)
                 {
                     matObjs.Add(matObj);

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MaterialObject : PhysicsObject, IDraggable
+public class ResourceObject : PhysicsObject, IDraggable
 {
     public string displayName;
     [SerializeField] private float springStiffness = 60f;

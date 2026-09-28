@@ -5,5 +5,5 @@ public class MaterialObjectBlueprint : ScriptableObject
 {
     public Sprite icon;
     public GameObject prefab;
-    public MaterialSpecs specs;
+    public ResourceSpecs specs;
 }
