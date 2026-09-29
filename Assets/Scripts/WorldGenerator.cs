@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class WorldGenerator : MonoBehaviour
 {
     private Dictionary<Vector2Int, HexCell> _cells;
-    
+
     [SerializeField] private int worldRadius;
     [SerializeField] private float noiseScale;
     [SerializeField] private int perlinOctaves = 5;
@@ -17,16 +16,20 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private int seed;
     [SerializeField] private TileBase resourceTile;
     [SerializeField] private TileBase liquidTile;
+    [SerializeField] private TileBase backgroundTile;
+    [SerializeField] private Color backgroundColor = new(0.294f, 0.717f, 0.489f, 1f);
     private float _seedOffsetX;
     private float _seedOffsetY;
 
     private Tilemap _solidTilemap;
+    private Tilemap _backgroundTilemap;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _cells = new();
+        _cells = new Dictionary<Vector2Int, HexCell>();
         _solidTilemap = GameObject.FindWithTag("Terrain").GetComponent<Tilemap>();
+        _backgroundTilemap = GameObject.FindWithTag("Background").GetComponent<Tilemap>();
         if (seed == 0)
         {
             seed = Random.Range(0, int.MaxValue);
@@ -36,7 +39,6 @@ public class WorldGenerator : MonoBehaviour
         _seedOffsetX = Random.Range(-10000, 10000);
         _seedOffsetY = Random.Range(-10000, 10000);
 
-        Debug.Log(_seedOffsetX + ", " + _seedOffsetY);
         Generate();
     }
 
@@ -50,10 +52,24 @@ public class WorldGenerator : MonoBehaviour
 
                 HexCell cell = GenerateCell(x, y);
 
-                _cells[new Vector2Int(x, y)] = cell;
+                _cells[cell.coordinate] = cell;
 
                 TileBase tile = GetTerrainTile(cell.terrain);
                 _solidTilemap.SetTile(cellPos, tile);
+                _backgroundTilemap.SetTile(cellPos, backgroundTile);
+                float brightness = Mathf.Lerp(0.6f, 1.2f, cell.elevation);
+                _backgroundTilemap.SetColor(cellPos, new Color(
+                    backgroundColor.r * brightness,
+                    backgroundColor.g * brightness,
+                    backgroundColor.b * brightness,
+                    backgroundColor.a));
+
+                GameObject solidTileObject = _solidTilemap.GetInstantiatedObject(cellPos);
+                if (solidTileObject is not null && solidTileObject.TryGetComponent(out HexCellTile solidHexTile))
+                {
+                    solidHexTile.SetBackingCell(cell);
+                }
+
             }
         }
     }

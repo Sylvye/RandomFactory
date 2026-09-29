@@ -4,20 +4,22 @@ public class HexCellTile : MonoBehaviour
 {
     protected HexCell backingCell;
     protected SpriteRenderer sr;
-    protected Color color;
+    private Color baseColor;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        if (backingCell is not null)
-        {
-            sr.color = color * (2 * backingCell.elevation - 0.5f);
-        }
+        baseColor = sr.color;
     }
 
     public void SetBackingCell(HexCell cell)
     {
         backingCell = cell;
+        float brightness = Mathf.Max(0f, 2f * cell.elevation - 0.5f);
+        sr.color = new Color(
+            baseColor.r * brightness,
+            baseColor.g * brightness,
+            baseColor.b * brightness,
+            baseColor.a);
     }
 }
