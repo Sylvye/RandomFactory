@@ -24,6 +24,9 @@ public class WorldGenerator : MonoBehaviour
     private Tilemap _solidTilemap;
     private Tilemap _backgroundTilemap;
 
+    public Tilemap SolidTilemap => _solidTilemap;
+    public Tilemap BackgroundTilemap => _backgroundTilemap;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,7 +35,7 @@ public class WorldGenerator : MonoBehaviour
         _backgroundTilemap = GameObject.FindWithTag("Background").GetComponent<Tilemap>();
         if (seed == 0)
         {
-            seed = Random.Range(0, int.MaxValue);
+            seed = Random.Range(int.MinValue, int.MaxValue);
         }
         Debug.Log("Seed: " + seed);
         Random.InitState(seed);
@@ -131,5 +134,52 @@ public class WorldGenerator : MonoBehaviour
         float noise = SampleFractalPerlin(x, y, perlinOctaves, perlinPersistence, perlinLacunarity);
         var cell = new HexCell(new Vector2Int(x, y), HeightToTerrainType(noise), noise);
         return cell;
+    }
+
+    public bool TryGetCell(Vector3Int cellPosition, out HexCell cell)
+    {
+        if (_cells is null)
+        {
+            cell = null;
+            return false;
+        }
+
+        return _cells.TryGetValue(new Vector2Int(cellPosition.x, cellPosition.y), out cell);
+    }
+
+    public Vector3 GetCellCenterWorld(Vector3Int cellPosition)
+    {
+        return _solidTilemap.GetCellCenterWorld(cellPosition);
+    }
+
+    public GameObject GetTileObject(Vector3Int cellPosition)
+    {
+        return _solidTilemap.GetInstantiatedObject(cellPosition);
+    }
+
+    public bool CanPlaceTile(TileBase tile, Vector3Int cellPosition)
+    {
+        if (tile is null || !TryGetCell(cellPosition, out var cell)) return false;
+        if (cell.terrain != TerrainType.Air || _solidTilemap.HasTile(cellPosition)) return false;
+
+        var center = (Vector2)GetCellCenterWorld(cellPosition);
+        var cellSize = (Vector2)_solidTilemap.layoutGrid.cellSize;
+        var hits = Physics2D.OverlapBoxAll(center, cellSize * 0.5f, 0f);
+        foreach (var hit in hits)
+        {
+            if (hit.gameObject == _solidTilemap.gameObject ||
+                hit.gameObject == _backgroundTilemap.gameObject) continue;
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool TryPlaceTile(TileBase tile, Vector3Int cellPosition)
+    {
+        if (!CanPlaceTile(tile, cellPosition)) return false;
+
+        _solidTilemap.SetTile(cellPosition, tile);
+        return true;
     }
 }

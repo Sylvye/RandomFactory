@@ -17,7 +17,12 @@ public class WorkStation : MonoBehaviour, IInteractable
         
     }
 
-    public void OnInteract()
+    public bool CanInteract(PlayerController player)
+    {
+        return true;
+    }
+
+    public void OnInteract(PlayerController player)
     {
         Debug.Log("Interacted with: " + name);
     }

@@ -1,7 +1,4 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerAbilityManager : MonoBehaviour
 {
@@ -26,9 +23,6 @@ public class PlayerAbilityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var eState = _kim.GetKeyState("e");
-        ExecuteInteract(eState);
-        
         var dState = _kim.GetKeyState("d");
         if (dState.IsKeyDown()) DebugManager.Debug = !DebugManager.Debug;
     }
@@ -99,31 +93,9 @@ public class PlayerAbilityManager : MonoBehaviour
         }
     }
 
-    private void ExecuteInteract(KeyState state)
+    public bool IsWithinReach(Vector2 worldPosition)
     {
-        if (state.IsKeyDown())
-        {
-            var hits = ReachOverlapBox();
-
-            IInteractable interactable = null;
-            var closestDistance = float.PositiveInfinity;
-            foreach (var hit in hits)
-            {
-                if (hit.attachedRigidbody == _pc.GetRB() || hit.transform.IsChildOf(transform)) continue;
-                var candidate = hit.GetComponentInParent<IInteractable>();
-                if (candidate == null) continue;
-                var pos = _pc.GetPos();
-                var distance = (pos - hit.ClosestPoint(pos)).sqrMagnitude;
-                if (distance >= closestDistance) continue;
-                closestDistance = distance;
-                interactable = candidate;
-            }
-
-            if (interactable is not null)
-            {
-                interactable.OnInteract();
-            }
-        }
+        return Vector2.Distance(transform.position, worldPosition) <= reach;
     }
 
     private Collider2D[] ReachOverlapBox()

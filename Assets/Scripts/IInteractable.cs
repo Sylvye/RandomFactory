@@ -2,5 +2,6 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public void OnInteract();
+    bool CanInteract(PlayerController player);
+    void OnInteract(PlayerController player);
 }
