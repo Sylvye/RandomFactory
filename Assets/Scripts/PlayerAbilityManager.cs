@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 public class PlayerAbilityManager : MonoBehaviour
 {
-    
+    public static PlayerAbilityManager Main;
     [SerializeField] private float reach = 1;
     [SerializeField] private Vector2 reachHitbox = new Vector2(1, 1);
     [SerializeField] private float strength = 30;
@@ -10,7 +11,12 @@ public class PlayerAbilityManager : MonoBehaviour
     private IDraggable _draggedObject;
     private KeyboardInputManager _kim;
     private PlayerController _pc;
-    
+
+    private void Awake()
+    {
+        Main = this;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

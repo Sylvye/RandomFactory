@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7826316916713802393}
   - component: {fileID: 3985644398889796043}
-  - component: {fileID: 5527986317474417233}
+  - component: {fileID: 2387653337766151490}
   m_Layer: 0
   m_Name: Crafting Hex
   m_TagString: Untagged
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &5527986317474417233
+--- !u!114 &2387653337766151490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,4 +104,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0842893e24ba4d9cbaca9c9f581a171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HexTiles.CraftingHexTile
-  objectRange: 0
+  inventory:
+    size: 0
+    itemTypes: 00000000010000000200000003000000
+    items: []
+  references:
+    version: 2
+    RefIds: []

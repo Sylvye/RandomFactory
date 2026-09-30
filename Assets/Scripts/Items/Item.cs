@@ -1,19 +1,21 @@
-public abstract class Item
+using System;
+using UnityEngine;
+
+namespace Items
 {
-    protected ItemType itemType;
-    
-    public Item(ItemType iType) 
+    [Serializable]
+    public abstract class Item
     {
-        itemType = iType;
-    }
+        [SerializeField] protected ItemType itemType;
     
-    public ItemType GetItemType()
-    {
-        return itemType;
-    }
+        public Item(ItemType iType) 
+        {
+            itemType = iType;
+        }
     
-    public void SetItemType(ItemType iType)
-    {
-        itemType = iType;
+        public ItemType GetItemType()
+        {
+            return itemType;
+        }
     }
 }

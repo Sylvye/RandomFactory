@@ -12,6 +12,7 @@ public class TileActionController : MonoBehaviour
     [SerializeField] private TileBase placeholderCraftingTile;
 
     private PlayerController _player;
+    private PlayerAbilityManager _pam;
     private TileBase _selectedPlaceable;
     private Vector3Int? _outlinedCell;
     private Vector3Int? _hoveredCell;
@@ -113,7 +114,7 @@ public class TileActionController : MonoBehaviour
     private bool EvaluateCell(Vector3Int cellPosition)
     {
         var center = worldGenerator.GetCellCenterWorld(cellPosition);
-        if (!_player.GetPAM().IsWithinReach(center)) return false;
+        if (!_pam.IsWithinReach(center)) return false;
 
         if (_selectedPlaceable is not null)
         {

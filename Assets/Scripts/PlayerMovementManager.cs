@@ -3,16 +3,22 @@ using UnityEngine.InputSystem.iOS;
 
 public class PlayerMovementManager : MonoBehaviour
 {
+    public static PlayerMovementManager Main;
     [SerializeField] private float speed;
     // [SerializeField] private float turnSpeed;
     [SerializeField] private float sprintMult;
     private PlayerController _pc;
     private PlayerAbilityManager _pam;
     
+    private void Awake()
+    {
+        Main = this;
+    }
+    
     public void Start()
     {
         _pc = PlayerController.Main;
-        _pam = _pc.GetPAM();
+        _pam = PlayerAbilityManager.Main;
     }
 
     public void FixedUpdate()

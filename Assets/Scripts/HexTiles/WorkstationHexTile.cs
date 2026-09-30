@@ -5,6 +5,8 @@ namespace HexTiles
 {
     public abstract class WorkstationHexTile : HexTile, IInteractable
     {
+        [SerializeField] protected ItemContainer inventory;
+        
         public bool CanInteract(PlayerController player)
         {
             return true;

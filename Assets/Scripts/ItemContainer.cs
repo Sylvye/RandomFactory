@@ -1,32 +1,41 @@
+using System;
 using System.Collections.Generic;
+using Items;
+using UnityEngine;
 
+[Serializable]
 public class ItemContainer
 {
-    protected int size;
-    protected List<ItemType> itemTypes;
-    protected List<Item> items;
+    [SerializeField] protected int size;
+    [SerializeField] protected List<ItemType> itemTypes;
+    [SerializeReference] protected List<Item> items;
     
     public ItemContainer() 
     {
         size = 0;
-        items = new();
+        itemTypes = ItemTypeHelpers.AllItemTypes();
+        items = new List<Item>();
     }
     
     public ItemContainer(int size) 
     {
         this.size = size;
+        items = new List<Item>();
+        ItemTypeHelpers.AllItemTypes();
     }
     
     public ItemContainer(int size, List<Item> items) 
     {
         this.size = size;
         this.items = items;
+        itemTypes = ItemTypeHelpers.AllItemTypes();
     }
     
     public ItemContainer(List<Item> items) 
     {
         size = items.Count;
         this.items = items;
+        itemTypes = ItemTypeHelpers.AllItemTypes();
     }
     
     public int GetSize() 
@@ -41,7 +50,8 @@ public class ItemContainer
     
     public void AddItem(Item item) 
     {
-        items.Add(item);
+        if (itemTypes.Contains(item.GetItemType()))
+            items.Add(item);
     }
     
     public void RemoveItem(Item item) 
