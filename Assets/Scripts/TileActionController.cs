@@ -23,7 +23,7 @@ public class TileActionController : MonoBehaviour
 
     private void Start()
     {
-        worldGenerator ??= FindAnyObjectByType<WorldGenerator>();
+        worldGenerator = WorldGenerator.Main;
         _player = PlayerController.Main;
     }
 

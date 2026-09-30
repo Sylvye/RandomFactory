@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using HexTiles;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class WorldGenerator : MonoBehaviour
 {
+    public static WorldGenerator Main;
     private Dictionary<Vector2Int, HexCell> _cells;
 
     [SerializeField] private int worldRadius;
@@ -27,6 +29,11 @@ public class WorldGenerator : MonoBehaviour
     public Tilemap SolidTilemap => _solidTilemap;
     public Tilemap BackgroundTilemap => _backgroundTilemap;
 
+    void Awake()
+    {
+        Main = this;
+    }
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -68,7 +75,7 @@ public class WorldGenerator : MonoBehaviour
                     backgroundColor.a));
 
                 GameObject solidTileObject = _solidTilemap.GetInstantiatedObject(cellPos);
-                if (solidTileObject is not null && solidTileObject.TryGetComponent(out HexCellTile solidHexTile))
+                if (solidTileObject is not null && solidTileObject.TryGetComponent(out HexTile solidHexTile))
                 {
                     solidHexTile.SetBackingCell(cell);
                 }

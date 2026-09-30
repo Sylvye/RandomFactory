@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class ResourceSpecs
+public class Resource
 {
     public float strength; // resistance to breaking
     public float hardness; // resistance to deforming

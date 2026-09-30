@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1897f761ec9ccdf4fac6c9dfbdcf7be5
+guid: 6a7a4552d9ce2410bae8baaf7add4cb8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1748572455809848832
-    second: StorageFlatTop32x32_0
+      213: -1713026396548215821
+    second: HexagonPointTop32x32_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -101,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: StorageFlatTop32x32_0
+      name: HexagonPointTop32x32_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 32
-        height: 30
+        x: 1
+        y: 0
+        width: 30
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 006149c526d244810800000000000000
-      internalID: 1748572455809848832
+      spriteID: 3fb40ee719b1a38e0800000000000000
+      internalID: -1713026396548215821
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      StorageFlatTop32x32_0: 1748572455809848832
+      HexagonPointTop32x32_0: -1713026396548215821
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

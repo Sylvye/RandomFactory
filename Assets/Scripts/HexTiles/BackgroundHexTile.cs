@@ -1,20 +1,19 @@
+using HexTiles;
 using UnityEngine;
 
-public class HexCellTile : MonoBehaviour
+public class BackgroundHexTile : HexTile
 {
-    protected HexCell backingCell;
-    protected SpriteRenderer sr;
     private Color baseColor;
 
-    void Awake()
+    protected override void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
+        base.Awake();
         baseColor = sr.color;
     }
-
-    public void SetBackingCell(HexCell cell)
+    
+    public override void SetBackingCell(HexCell cell)
     {
-        backingCell = cell;
+        base.SetBackingCell(cell);
         float brightness = Mathf.Max(0f, 2f * cell.elevation - 0.5f);
         sr.color = new Color(
             baseColor.r * brightness,

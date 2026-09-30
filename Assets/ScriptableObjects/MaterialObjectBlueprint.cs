@@ -1,9 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MaterialObject", menuName = "ScriptableObjects/MaterialObjects")]
-public class MaterialObjectBlueprint : ScriptableObject
+namespace ScriptableObjects
 {
-    public Sprite icon;
-    public GameObject prefab;
-    public ResourceSpecs specs;
+    [CreateAssetMenu(fileName = "MaterialObject", menuName = "ScriptableObjects/MaterialObjects")]
+    public class MaterialObjectBlueprint : ScriptableObject
+    {
+        public Sprite icon;
+        public GameObject prefab;
+        public Resource resource;
+    }
 }

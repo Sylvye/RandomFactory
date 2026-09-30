@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7826316916713802393}
   - component: {fileID: 3985644398889796043}
-  - component: {fileID: 3206280353619706438}
+  - component: {fileID: 31618633903076274}
   m_Layer: 0
   m_Name: Background Hex
   m_TagString: Background
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &3206280353619706438
+--- !u!114 &31618633903076274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,6 +101,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8790128148499780479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1061ace100374c939645db4897bc835, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dd3fda75b972494e8049d2cb2eacc55, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HexCellTile
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundHexTile
