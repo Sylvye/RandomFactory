@@ -1,4 +1,5 @@
 using System;
+using Items;
 using UnityEngine;
 
 public class PlayerInventoryManager : MonoBehaviour
@@ -21,5 +22,25 @@ public class PlayerInventoryManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AddToInventory(ItemStack itemStack)
+    {
+        _itemContainer.AddItem(itemStack);
+    }
+
+    public void RemoveFromInventory(ItemStack itemStack)
+    {
+        _itemContainer.RemoveItemStack(itemStack);
+    }
+    
+    public ItemContainer GetItemAt(int index)
+    {
+        return _itemContainer;
+    }
+
+    public void SetItemAt(int index, ItemContainer itemContainer)
+    {
+        return;
     }
 }

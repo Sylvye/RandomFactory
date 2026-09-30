@@ -825,6 +825,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425eb80dc28bc43489f3d2216ef95ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
+  itemStack:
+    amount: 0
+  slotIndex: 1
+  background: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!1 &802651685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,6 +1219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425eb80dc28bc43489f3d2216ef95ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
+  itemStack:
+    amount: 0
+  slotIndex: 2
+  background: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!1 &1221704789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,6 +1274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425eb80dc28bc43489f3d2216ef95ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
+  itemStack:
+    amount: 0
+  slotIndex: 0
+  background: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!1 &1370402158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,6 +2041,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425eb80dc28bc43489f3d2216ef95ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
+  itemStack:
+    amount: 0
+  slotIndex: 3
+  background: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!1 &1993578961
 GameObject:
   m_ObjectHideFlags: 0
