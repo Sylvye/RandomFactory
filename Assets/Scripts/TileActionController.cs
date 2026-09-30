@@ -12,6 +12,7 @@ public class TileActionController : MonoBehaviour
     [SerializeField] private TileBase placeholderCraftingTile;
 
     private PlayerController _player;
+    private PointerInputManager _pointer;
     private PlayerAbilityManager _pam;
     private TileBase _selectedPlaceable;
     private Vector3Int? _outlinedCell;
@@ -26,23 +27,24 @@ public class TileActionController : MonoBehaviour
     {
         worldGenerator = WorldGenerator.Main;
         _player = PlayerController.Main;
+        _pointer = PointerInputManager.Main;
+        _pam = PlayerAbilityManager.Main;
     }
 
     private void Update()
     {
         HandlePlaceholderSelection();
 
-        var pointer = PointerInputManager.Main;
-        if (pointer is null || worldGenerator is null || overlayTilemap is null || _player is null)
+        if (_pointer is null || worldGenerator is null || overlayTilemap is null || _player is null)
         {
             ClearHover();
             return;
         }
 
         var pointerOverUi = EventSystem.current is not null && EventSystem.current.IsPointerOverGameObject();
-        RefreshHover(pointer.GetMouseWorldPos(), pointerOverUi);
+        RefreshHover(_pointer.GetMouseWorldPos(), pointerOverUi);
 
-        if (!pointerOverUi && pointer.WasLeftButtonPressedThisFrame())
+        if (!pointerOverUi && _pointer.WasLeftButtonPressedThisFrame())
         {
             ExecuteHoveredAction();
         }

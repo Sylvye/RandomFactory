@@ -8,13 +8,15 @@ public class PlayerController : PhysicsObject
     private PlayerMovementManager _pmm;
     private PlayerInventoryManager _pim;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         Main = this;
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         _pam = PlayerAbilityManager.Main;
         _pmm = PlayerMovementManager.Main;
         _pim = PlayerInventoryManager.Main;

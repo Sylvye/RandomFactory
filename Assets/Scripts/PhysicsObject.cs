@@ -2,45 +2,60 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class PhysicsObject : MonoBehaviour
+public abstract class PhysicsObject : MonoBehaviour
 {
-    protected Rigidbody2D Rb;
-    protected Collider2D Col;
+    protected Rigidbody2D rb;
+    protected Collider2D col;
+
+    protected virtual void Awake()
+    {
+        
+    }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
-        Rb = GetComponent<Rigidbody2D>();
-        Col = GetComponent<Collider2D>();
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+    }
+
+    protected virtual void Update()
+    {
+        
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        
     }
 
     public virtual void ApplyForce(Vector2 force)
     {
-        Rb.AddForce(force);
+        rb.AddForce(force);
     }
 
     public Vector2 GetVelocity()
     {
-        return Rb.linearVelocity;
+        return rb.linearVelocity;
     }
     
     public Rigidbody2D GetRB()
     {
-        return Rb;
+        return rb;
     }
     
     public Collider2D GetCol()
     {
-        return Col;
+        return col;
     }
 
     public float GetMass()
     {
-        return Rb.mass;
+        return rb.mass;
     }
 
     public Vector2 GetPos()
     {
-        return Rb.position;
+        return rb.position;
     }
 }

@@ -9,13 +9,14 @@ public class ResourceObject : PhysicsObject, IDraggable
     private float _strength;
     private bool _dragging;
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         if (!_dragging) return;
 
         // Strength is a force limit. Mass affects acceleration through the Rigidbody2D.
-        var force = (_target - Rb.position) * springStiffness - Rb.linearVelocity * springDamping;
-        Rb.AddForce(Vector2.ClampMagnitude(force, _strength));
+        var force = (_target - rb.position) * springStiffness - rb.linearVelocity * springDamping;
+        rb.AddForce(Vector2.ClampMagnitude(force, _strength));
     }
 
     public void OnDrag(Vector2 position, float strength)
@@ -27,7 +28,7 @@ public class ResourceObject : PhysicsObject, IDraggable
     public void OnStartDrag()
     {
         _dragging = true;
-        _target = Rb.position;
+        _target = rb.position;
     }
 
     public void OnStopDrag()

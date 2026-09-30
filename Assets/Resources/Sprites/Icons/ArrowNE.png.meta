@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0b334187497aa5c42b1504c8e997bb82
+guid: 569f24c72ea874646abe44cb79356bc9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7134793456983068852
-    second: CombinerFlatTop32x32_0
+      213: -5105328178277491570
+    second: ArrowNE32x32_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -101,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CombinerFlatTop32x32_0
+      name: ArrowNE32x32_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 32
-        height: 30
+        x: 6
+        y: 8
+        width: 19
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c4f2eb2172f1cfc90800000000000000
-      internalID: -7134793456983068852
+      spriteID: e8c5aff221b3629b0800000000000000
+      internalID: -5105328178277491570
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CombinerFlatTop32x32_0: -7134793456983068852
+      ArrowNE32x32_0: -5105328178277491570
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

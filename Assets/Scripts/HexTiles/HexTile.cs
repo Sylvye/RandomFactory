@@ -12,6 +12,11 @@ namespace HexTiles
             sr = GetComponent<SpriteRenderer>();
         }
 
+        protected virtual void Start()
+        {
+            
+        }
+
         public virtual void SetBackingCell(HexCell cell)
         {
             backingCell = cell;
