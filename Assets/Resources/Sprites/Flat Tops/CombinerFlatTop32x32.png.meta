@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 20aeb8ddab7744d14803df77b2971628
+guid: 0b334187497aa5c42b1504c8e997bb82
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3607280770689956250
-    second: ForgeFlatTop32x32_0
+      213: -7134793456983068852
+    second: CombinerFlatTop32x32_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ForgeFlatTop32x32_0
+      name: CombinerFlatTop32x32_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a99721eafb2af0230800000000000000
-      internalID: 3607280770689956250
+      spriteID: c4f2eb2172f1cfc90800000000000000
+      internalID: -7134793456983068852
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ForgeFlatTop32x32_0: 3607280770689956250
+      CombinerFlatTop32x32_0: -7134793456983068852
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
