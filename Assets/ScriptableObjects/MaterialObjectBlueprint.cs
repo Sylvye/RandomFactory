@@ -7,6 +7,6 @@ namespace ScriptableObjects
     {
         public Sprite icon;
         public GameObject prefab;
-        public Resource resource;
+        public MaterialData materialData;
     }
 }
